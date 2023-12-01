@@ -1,7 +1,6 @@
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import loadPrcFile, Vec3
 from direct.task import Task
-from math import sin, cos
 
 loadPrcFile('settings.prc')
 

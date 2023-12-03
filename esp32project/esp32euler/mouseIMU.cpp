@@ -62,7 +62,7 @@ bool IMU_calibration()
     static int samples_x = 0;
     static int samples_y = 0;
     static int samples_z = 0;
-    byte value;
+    uint8_t  value;
     
     //Read eeprom to look if the calibration has happened once
     value = EEPROM.read(addr_eep);
@@ -76,14 +76,14 @@ bool IMU_calibration()
       {
         calibValues.buffer[i] = EEPROM.read(addr_eep+i+1);
       }
-      Serial.print(value);
-      Serial.print(" ");
-      Serial.println();
+      //Serial.print(value);
+      //Serial.print(" ");
+      //Serial.println();
       //TODO
     }
     else if(calibrated== false )
     {           
-        digitalWrite(16, HIGH);
+       // digitalWrite(16, HIGH);
         if(counter < SAMPLES)
         {
           samples_x+=GyX;
@@ -111,7 +111,7 @@ bool IMU_calibration()
     }
     else
     {
-      digitalWrite(16, LOW);
+     // digitalWrite(16, LOW);
     }
     
     return calibrated;
@@ -209,4 +209,3 @@ float derivaPitch(float sinal) {
   zero = sinalCorrigido;
   return valorDeriv;
 }
-

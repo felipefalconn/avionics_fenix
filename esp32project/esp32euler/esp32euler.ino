@@ -17,11 +17,11 @@
 #include "MahonyAHRS.h"
 #include "mpu6050.h"
 #include "mouseIMU.h"
-#include "BluetoothSerial.h"
+// #include "BluetoothSerial.h"
 
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
+// #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+// #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
+// #endif
 //---------------------------------------------------------------------------------------------------
 //Definitions
 //Mouse
@@ -45,7 +45,7 @@ extern bool g_novaPiscada;
 
 extern int g_clique;
 
-BluetoothSerial SerialBT;
+// BluetoothSerial SerialBT;
 
 #define I2C_SDA 32
 #define I2C_SCL 33
@@ -80,12 +80,13 @@ float corrigeAngulo(EulerAngle *angle) {
 
 void setup() 
 {
-  Wire.begin(I2C_SDA,I2C_SCL);
-  Wire.setClock(100000);  // 400kHz I2C clock. Comment this line if having compilation difficulties
+  Wire.begin();
+  // Wire.begin();
+  // Wire.setClock(100000);  // 400kHz I2C clock. Comment this line if having compilation difficulties
   delay(100);
   MPU6050_Init();
   Serial.begin(115200);
-  SerialBT.begin("ESP32test"); //Bluetooth device name
+  // SerialBT.begin("ESP32test"); //Bluetooth device name
 
   // pinMode(ACIONADOR,INPUT);
   // eyeBlinkSetup();
@@ -110,11 +111,11 @@ void loop()
  
 
 
-  if(IMU_calibration())
-  {
+  // if(IMU_calibration())
+  // {
     //MahonyAHRSupdateIMU( gxrs,  gyrs,  gzrs , axg,  ayg,  azg);
-    MahonyAHRSupdateIMU(gyrs, gzrs, gxrs, ayg, azg, axg);
-    getRollPitchYaw_mahony();
+     MahonyAHRSupdateIMU(gyrs, gzrs, gxrs, ayg, azg, axg);
+     getRollPitchYaw_mahony();
 
    EulerAngle pitch, yaw, roll;
 
@@ -134,37 +135,44 @@ void loop()
      yawCorrigido = corrigeAngulo(&yaw);
      rollCorrigido = corrigeAngulo(&roll);
 
-    Serial.print(yawCorrigido);
+    Serial.print(yaw_mahony);
     Serial.print(" ");
-    Serial.print(pitchCorrigido);
+    Serial.print(pitch_mahony);
     Serial.print(" ");
-    Serial.print(rollCorrigido);
+    Serial.print(roll_mahony);
     Serial.print(" ");
     Serial.println();
 
-
-     SerialBT.print(yawCorrigido);
-    SerialBT.print(" ");
-    SerialBT.print(pitchCorrigido);
-    SerialBT.print(" ");
-    SerialBT.print(rollCorrigido);
-    SerialBT.print(" \n");
+    //  SerialBT.print(gyrs);
+    // SerialBT.print(" ");
+    // SerialBT.print(gxrs);
+    // SerialBT.print(" ");
+    // SerialBT.print(gzrs);
+    // SerialBT.print(" \n");
     
-
-    //gesto = maquinaGestos_v2(derivaYaw(yaw_mahony), derivaPitch(pitch_mahony), g_clique);
-    // atividade = interpretaGestos(gesto);
-    // scroll = scrollDetector();
-    // if(atividade == false)
-    // {
-    //   xchg = 0;
-    //   ychg = 0;
-    //   scroll = 0;
-    // }
-    //dwellClick(xchg, ychg, scroll);
+    // Serial.print(gxrs);
+    // Serial.print(" ");
+    // Serial.print(gyrs);
+    // Serial.print(" ");
+    // Serial.print(gzrs);
+    // Serial.print(" ");
+    // Serial.print(axg); 
+    // Serial.print(" ");
+    // Serial.print(ayg);
+    // Serial.print(" ");
+    // Serial.print(azg);
+    // Serial.print(" ");
+    // Serial.print(gxrs); 
+    // Serial.print(" ");
+    // Serial.print(gxrs);
+    // Serial.print(" ");
+    // Serial.print(gxrs);
+    
+    // Serial.println();
    
-  }
+   
+  // }
   // counter ++;
 
 
 }
-

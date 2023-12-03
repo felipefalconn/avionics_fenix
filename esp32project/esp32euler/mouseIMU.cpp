@@ -26,6 +26,9 @@ float GyX_offset, GyY_offset, GyZ_offset;
 
 int g_clique = 0;
 
+
+
+
 void filtraIMU() {
   //Filtro 2 ordem
   // ax_filtro= filtro_2PB10Hz(AcX, pbax);

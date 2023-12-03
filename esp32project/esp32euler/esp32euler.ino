@@ -45,6 +45,8 @@ extern bool g_novaPiscada;
 
 extern int g_clique;
 
+BluetoothSerial SerialBT;
+
 #define I2C_SDA 32
 #define I2C_SCL 33
 
@@ -75,7 +77,6 @@ float corrigeAngulo(EulerAngle *angle) {
 
   return sinalCorrigido;
 }
-BluetoothSerial SerialBT;
 
 void setup() 
 {
@@ -141,12 +142,13 @@ void loop()
     Serial.print(" ");
     Serial.println();
 
-    SerialBT.write(yawCorrigido);
-    SerialBT.write(" ");
-    SerialBT.write(pitchCorrigido);
-    SerialBT.write(" ");
-    SerialBT.write(rollCorrigido);
-    SerialBT.write(" \n");
+
+     SerialBT.print(yawCorrigido);
+    SerialBT.print(" ");
+    SerialBT.print(pitchCorrigido);
+    SerialBT.print(" ");
+    SerialBT.print(rollCorrigido);
+    SerialBT.print(" \n");
     
 
     //gesto = maquinaGestos_v2(derivaYaw(yaw_mahony), derivaPitch(pitch_mahony), g_clique);

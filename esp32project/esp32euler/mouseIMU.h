@@ -7,6 +7,9 @@
 #define MPU6050_ACC_GAIN 16384.0
 #define MPU6050_GYRO_GAIN 131.072
 
+
+
+
 void filtraIMU();
 bool IMU_calibration();
 float corrigeYaw(float sinal) ;

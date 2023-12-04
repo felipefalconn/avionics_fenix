@@ -17,6 +17,7 @@
 #include "MahonyAHRS.h"
 #include "mpu6050.h"
 #include "mouseIMU.h"
+
 // #include "BluetoothSerial.h"
 
 // #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -111,13 +112,13 @@ void loop()
  
 
 
-  // if(IMU_calibration())
-  // {
-    //MahonyAHRSupdateIMU( gxrs,  gyrs,  gzrs , axg,  ayg,  azg);
-     MahonyAHRSupdateIMU(gyrs, gzrs, gxrs, ayg, azg, axg);
+  if(IMU_calibration())
+  {
+     MahonyAHRSupdateIMU( gxrs,  gyrs,  gzrs , axg,  ayg,  azg);
+    // MahonyAHRSupdateIMU(gyrs, gzrs, gxrs, ayg, azg, axg);
      getRollPitchYaw_mahony();
 
-   EulerAngle pitch, yaw, roll;
+    EulerAngle pitch, yaw, roll;
 
     initializeEulerAngle(&pitch);
     initializeEulerAngle(&yaw);
@@ -171,7 +172,7 @@ void loop()
     // Serial.println();
    
    
-  // }
+   }
   // counter ++;
 
 

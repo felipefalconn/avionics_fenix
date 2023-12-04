@@ -606,7 +606,7 @@ def parse_serial_data(serial_input):
         # For example, you can perform other operations with the data here
 
         # Return the values as a tuple
-        return yaw, roll, pitch
+        return yaw, pitch, roll
 
     except ValueError as e:
         print(f"Error parsing serial data: {e}")

@@ -4,9 +4,14 @@ Control and data processing system created by the Fênix UFMG 2023/24 trainee av
 # Install avionic-dependencies
 ```
 git clone git@github.com:felipefalconn/avionics_fenix.git
+```
+```
 cd avionics_fenix
+```
+```
 pip install -r requirements.txt
 ```
+
 
 
 ## Graph plotting
@@ -14,6 +19,8 @@ pip install -r requirements.txt
 
 ```
 cd avionics_fenix/2Dplot
+```
+```
 python3 main-2d-plot.py
 ```
 
@@ -23,5 +30,7 @@ python3 main-2d-plot.py
 - Connect your Inertial Measurement Unit
 ```
 cd avionics_fenix/Gait-Tracking-With-x-IMU-Python-master
+```
+```
 python3 script.py
 ```

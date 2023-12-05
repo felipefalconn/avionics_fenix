@@ -1,7 +1,7 @@
 # avionics_fenix
 Control and data processing system created by the Fênix UFMG 2023/24 trainee avionics team.
 
-# Install avionics-dependencies
+## Install avionics-dependencies
 ```
 git clone git@github.com:felipefalconn/avionics_fenix.git
 ```

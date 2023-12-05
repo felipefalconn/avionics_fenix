@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 
 ## Graph plotting
-![Graphs of speed, acceleration and height, by time.](https://imgur.com/bGYhpJI)
+![Graphs of speed, acceleration and height, by time.](https://i.imgur.com/bGYhpJI.png)
 
 ```
 cd avionics_fenix/2Dplot

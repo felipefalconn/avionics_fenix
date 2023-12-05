@@ -27,7 +27,7 @@ python3 main-2d-plot.py
 ## Real-time attitude simulation
 ![Attitude simulation of an IMU, in real time.](https://i.imgur.com/IDNQEMN.png)
 
-- Connect your Inertial Measurement Unit
+— Connect your Inertial Measurement Unit
 ```
 cd avionics_fenix/Gait-Tracking-With-x-IMU-Python-master
 ```

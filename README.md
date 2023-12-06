@@ -1,7 +1,7 @@
 # avionics_fenix
 Control and data processing system created by the Fênix UFMG 2023/24 trainee avionics team.
 
-# Install avionics-dependencies
+## Install avionics-dependencies
 ```
 git clone git@github.com:felipefalconn/avionics_fenix.git
 ```
@@ -27,7 +27,7 @@ python3 main-2d-plot.py
 ## Real-time attitude simulation
 ![Attitude simulation of an IMU, in real time.](https://i.imgur.com/IDNQEMN.png)
 
-- Connect your Inertial Measurement Unit
+— Connect your Inertial Measurement Unit
 ```
 cd avionics_fenix/Gait-Tracking-With-x-IMU-Python-master
 ```

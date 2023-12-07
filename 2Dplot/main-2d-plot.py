@@ -115,9 +115,13 @@ class GraphWidget(QWidget):
         self.curr_flight_time = 0
 
         # Time window parameters (initial, final)
+        self.initial_time_window_label = QLabel(self)
+        self.initial_time_window_label.setText("Tempo inicial:")
         self.initial_time_window = QLineEdit()
         self.initial_time_window.setPlaceholderText("0")
         self.initial_time_window.textChanged.connect(self.change_window_start)
+        self.final_time_window_label = QLabel(self)
+        self.final_time_window_label.setText("Tempo final:")
         self.final_time_window = QLineEdit()
         self.final_time_window.setPlaceholderText("0")
         self.final_time_window.textChanged.connect(self.change_window_finish)
@@ -132,8 +136,11 @@ class GraphWidget(QWidget):
         self.widget_statistics.addWidget(self.aceleracao, 2, 0)
         self.widget_statistics.addWidget(self.apogeu, 3, 0)
         self.widget_statistics.addWidget(self.tempo_de_voo, 4, 0)
-        self.widget_statistics.addWidget(self.initial_time_window, 0, 1)
-        self.widget_statistics.addWidget(self.final_time_window, 1, 1)
+
+        self.widget_statistics.addWidget(self.initial_time_window_label, 0, 1)
+        self.widget_statistics.addWidget(self.final_time_window_label, 1, 1)
+        self.widget_statistics.addWidget(self.initial_time_window, 0, 2)
+        self.widget_statistics.addWidget(self.final_time_window, 1, 2)
 
     def change_window_start(self, value):
         '''
@@ -211,6 +218,7 @@ class GraphWidget(QWidget):
     def update_plot(self):
         if ((self.frame - self.window_start) > 20) and self.update_window_start:
             self.window_start += 1
+            self.initial_time_window.setPlaceholderText(str(self.window_start + 1))
         if self.frame < len(self.time_data):
             self.plot_acceleration.setData(
                 self.time_data[self.window_start:self.window_finish + 1], self.acceleration_random[self.window_start:self.window_finish + 1], symbol='o')
@@ -221,6 +229,7 @@ class GraphWidget(QWidget):
             self.frame += 1
             if self.update_window_finish:
                 self.window_finish = self.frame
+                self.final_time_window.setPlaceholderText(str(self.window_finish + 1))
             self.update_statistics(self.frame)
         else:
             self.animation_timer.stop()

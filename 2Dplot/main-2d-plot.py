@@ -218,7 +218,7 @@ class GraphWidget(QWidget):
     def update_plot(self):
         if ((self.frame - self.window_start) > 20) and self.update_window_start:
             self.window_start += 1
-            self.initial_time_window.setPlaceholderText(str(self.window_start + 1))
+            self.initial_time_window.setPlaceholderText(str(self.window_start))
         if self.frame < len(self.time_data):
             self.plot_acceleration.setData(
                 self.time_data[self.window_start:self.window_finish + 1], self.acceleration_random[self.window_start:self.window_finish + 1], symbol='o')
@@ -229,7 +229,7 @@ class GraphWidget(QWidget):
             self.frame += 1
             if self.update_window_finish:
                 self.window_finish = self.frame
-                self.final_time_window.setPlaceholderText(str(self.window_finish + 1))
+                self.final_time_window.setPlaceholderText(str(self.window_finish))
             self.update_statistics(self.frame)
         else:
             self.animation_timer.stop()
@@ -286,50 +286,59 @@ class GraphWidget(QWidget):
         if self.is_dark_mode:
             background_color = '#111'
             text_color = '#fff'
+            pen_color_a ='#85ffb6'
+            pen_color_v ='#9652d1'
+            pen_color_h ='#d0c3f7'
+            symbol_brush_a = '#85ffb6'
+            symbol_brush_v = '#9652d1'
+            symbol_brush_h = '#d0c3f7'
             self.plot_widget_acceleration.clear()
             self.plot_widget_velocity.clear()
             self.plot_widget_height.clear()
-            self.plot_acceleration = self.plot_widget_acceleration.plot(
-                pen='#85ffb6', symbolBrush='#85ffb6', symbolPen='#111')
-            self.plot_velocity = self.plot_widget_velocity.plot(
-                pen='#9652d1', symbolBrush='#9652d1', symbolPen='#111')
-            self.plot_height = self.plot_widget_height.plot(
-                pen='#d0c3f7', symbolBrush='#d0c3f7', symbolPen='#111')
-            self.plot_widget_acceleration.getPlotItem().getAxis('bottom').setTextPen(color='w')
-            self.plot_widget_acceleration.getPlotItem().getAxis('left').setTextPen(color='w')
+            
+            self.plot_widget_acceleration.getPlotItem().getAxis('bottom').setTextPen(color=text_color)
+            self.plot_widget_acceleration.getPlotItem().getAxis('left').setTextPen(color=text_color)
 
-            self.plot_widget_velocity.getPlotItem().getAxis('bottom').setTextPen(color='w')
-            self.plot_widget_velocity.getPlotItem().getAxis('left').setTextPen(color='w')
+            self.plot_widget_velocity.getPlotItem().getAxis('bottom').setTextPen(color=text_color)
+            self.plot_widget_velocity.getPlotItem().getAxis('left').setTextPen(color=text_color)
 
-            self.plot_widget_height.getPlotItem().getAxis('bottom').setTextPen(color='w')
-            self.plot_widget_height.getPlotItem().getAxis('left').setTextPen(color='w')
+            self.plot_widget_height.getPlotItem().getAxis('bottom').setTextPen(color=text_color)
+            self.plot_widget_height.getPlotItem().getAxis('left').setTextPen(color=text_color)
             p = self.palette()
             p.setColor(self.backgroundRole(), QColor(background_color))
             p.setColor(self.foregroundRole(), QColor(text_color))
             self.setPalette(p)
         else:
-            background_color = 'w'
-            text_color = 'k'
-            self.plot_acceleration = self.plot_widget_acceleration.plot(
-                pen='#2B2A32', symbolBrush='#2B2A32', symbolPen='w')
-            self.plot_velocity = self.plot_widget_velocity.plot(
-                pen='#3d2163', symbolBrush='#3d2163', symbolPen='w')
-            self.plot_height = self.plot_widget_height.plot(
-                pen='#355eab', symbolBrush='#355eab', symbolPen='w')
-            
-            self.plot_widget_acceleration.getPlotItem().getAxis('bottom').setTextPen(color='k')
-            self.plot_widget_acceleration.getPlotItem().getAxis('left').setTextPen(color='k')
+            background_color = '#fff'
+            text_color = '#111'
+            pen_color_a ='#2B2A32'
+            pen_color_v ='#3d2163'
+            pen_color_h ='#355eab'
+            symbol_brush_a = '#2B2A32'
+            symbol_brush_v = '#3d2163'
+            symbol_brush_h = '#355eab'
+        self.plot_widget_acceleration.clear()
+        self.plot_widget_velocity.clear()
+        self.plot_widget_height.clear()
+        self.plot_acceleration = self.plot_widget_acceleration.plot(
+            pen=pen_color_a, symbolBrush=symbol_brush_a, symbolPen=background_color)
+        self.plot_velocity = self.plot_widget_velocity.plot(
+            pen=pen_color_v, symbolBrush=symbol_brush_v, symbolPen=background_color)
+        self.plot_height = self.plot_widget_height.plot(
+            pen=pen_color_h, symbolBrush=symbol_brush_h, symbolPen=background_color)
+        self.plot_widget_acceleration.getPlotItem().getAxis('bottom').setTextPen(color=text_color)
+        self.plot_widget_acceleration.getPlotItem().getAxis('left').setTextPen(color=text_color)
 
-            self.plot_widget_velocity.getPlotItem().getAxis('bottom').setTextPen(color='k')
-            self.plot_widget_velocity.getPlotItem().getAxis('left').setTextPen(color='k')
+        self.plot_widget_velocity.getPlotItem().getAxis('bottom').setTextPen(color=text_color)
+        self.plot_widget_velocity.getPlotItem().getAxis('left').setTextPen(color=text_color)
 
-            self.plot_widget_height.getPlotItem().getAxis('bottom').setTextPen(color='k')
-            self.plot_widget_height.getPlotItem().getAxis('left').setTextPen(color='k')
-        
-            p = self.palette()
-            p.setColor(self.backgroundRole(), QColor("#fff"))
-            p.setColor(self.foregroundRole(), QColor("#111"))
-            self.setPalette(p)
+        self.plot_widget_height.getPlotItem().getAxis('bottom').setTextPen(color=text_color)
+        self.plot_widget_height.getPlotItem().getAxis('left').setTextPen(color=text_color)
+    
+        p = self.palette()
+        p.setColor(self.backgroundRole(), QColor(background_color))
+        p.setColor(self.foregroundRole(), QColor(text_color))
+        self.setPalette(p)
 
         # Aplicar as alterações aos gráficos
         self.plot_widget_acceleration.setBackground(background_color)
